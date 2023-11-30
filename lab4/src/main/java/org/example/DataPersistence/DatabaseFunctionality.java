@@ -1,5 +1,6 @@
 package org.example.DataPersistence;
 
 public interface DatabaseFunctionality {
-    public String[] TrainingNames();
+    String[] trainingNames();
+    boolean addNewTraining(String name);
 }

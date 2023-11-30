@@ -1,9 +1,6 @@
 package org.example.DataPersistence;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +24,7 @@ public class SQLiteQuery {
         }
     }
 
-    String[] trainingNames(){
+    String[] SelectTrainingNames(){
         try{
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT training_name FROM trainings");
@@ -38,6 +35,36 @@ public class SQLiteQuery {
             result.close();
             statement.close();
             return list.toArray(new String[list.size()]);
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    private boolean doesTrainingNameExist(String name){
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT COUNT(training_name) FROM trainings WHERE training_name ='" + name.trim() + "'");
+            return result.getInt(1) != 0;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    boolean insertNewTrainingName(String name){
+        try{
+            Statement statement = connection.createStatement();
+            if(!doesTrainingNameExist(name)){
+                PreparedStatement ps = connection.prepareStatement("INSERT INTO trainings VALUES (?)");
+                ps.setString(1, name.trim());
+                ps.executeUpdate();
+                ps.close();
+                //result.close();
+                statement.close();
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         catch (SQLException e){
             throw new RuntimeException(e);

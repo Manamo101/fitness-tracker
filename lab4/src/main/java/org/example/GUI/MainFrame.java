@@ -1,5 +1,4 @@
 package org.example.GUI;
-import org.example.Logic.ProgramOperation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,9 +6,7 @@ import java.net.URL;
 
 public class MainFrame extends JFrame {
     private final JTabbedPane tabbedPane;
-    private final ProgramOperation programOperation;
-    public MainFrame(String name, ProgramOperation programOperation){
-        this.programOperation = programOperation;
+    public MainFrame(String name){
         tabbedPane = new JTabbedPane();
         tabbedPane.setFocusable(false);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -27,15 +24,13 @@ public class MainFrame extends JFrame {
         }
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        this.setSize(800,600);
         this.setMinimumSize(new Dimension(800,600));
         this.add(tabbedPane);
         addExerciseTab();
         addSessionTab();
         addGoalsTab();
         addStatsTab();
-    }
-    public ProgramOperation getProgramOperation(){
-        return programOperation;
     }
     private void addExerciseTab(){
         try{
