@@ -1,20 +1,22 @@
 package org.example.GUI;
+import org.example.Logic.ProgramOperation;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
 public class MainFrame extends JFrame {
-    JTabbedPane tabbedPane;
-
-    public MainFrame(String name){
-        super(name);
-
+    private final JTabbedPane tabbedPane;
+    private final ProgramOperation programOperation;
+    public MainFrame(String name, ProgramOperation programOperation){
+        this.programOperation = programOperation;
         tabbedPane = new JTabbedPane();
         tabbedPane.setFocusable(false);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         tabbedPane.setBackground(Color.LIGHT_GRAY);
         tabbedPane.setTabPlacement(SwingConstants.LEFT);
 
+        this.setTitle(name);
         this.setVisible(true);
         try{
             ImageIcon programIcon = new ImageIcon(MainFrame.class.getClassLoader().getResource("ProgramIcon.png"));
@@ -32,18 +34,20 @@ public class MainFrame extends JFrame {
         addGoalsTab();
         addStatsTab();
     }
-
+    public ProgramOperation getProgramOperation(){
+        return programOperation;
+    }
     private void addExerciseTab(){
         try{
 
             URL exerciseTabIconPath = MainFrame.class.getClassLoader().getResource("exerciseTabIcon.png");
             ImageIcon icon = new ImageIcon(exerciseTabIconPath);
             Image iconScaled = icon.getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT);
-            tabbedPane.addTab("Exercises", new ImageIcon(iconScaled),new ExercisePanel());
+            tabbedPane.addTab("Trainings", new ImageIcon(iconScaled),new TrainingsPanel());
         }
         catch (NullPointerException e){
             System.out.println("image is not found");
-            tabbedPane.addTab("Exercises", new ExercisePanel());
+            tabbedPane.addTab("Trainings", new TrainingsPanel());
         }
     }
 
