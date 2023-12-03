@@ -40,10 +40,10 @@ public class SQLiteQuery {
             throw new RuntimeException(e);
         }
     }
-    private boolean doesTrainingNameExist(String name){
+    boolean doesTrainingNameExist(String name){
         try{
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT COUNT(training_name) FROM trainings WHERE training_name ='" + name.trim() + "'");
+            ResultSet result = statement.executeQuery("SELECT COUNT(training_name) FROM trainings WHERE training_name ='" + name + "'");
             return result.getInt(1) != 0;
         }
         catch (SQLException e){
@@ -53,21 +53,62 @@ public class SQLiteQuery {
     boolean insertNewTrainingName(String name){
         try{
             Statement statement = connection.createStatement();
-            if(!doesTrainingNameExist(name)){
                 PreparedStatement ps = connection.prepareStatement("INSERT INTO trainings VALUES (?)");
                 ps.setString(1, name.trim());
                 ps.executeUpdate();
                 ps.close();
-                //result.close();
                 statement.close();
-                return true;
+        }
+        catch (SQLException e){
+            e.getMessage();
+            return false;
+        }
+        return true;
+    }
+    boolean deleteTrainingName(String name){
+        try{
+            Statement statement = connection.createStatement();
+            statement.execute("DELETE FROM trainings WHERE training_name ='" + name + "'");
+        }
+        catch (SQLException e){
+            System.out.println("delete went wrong");
+            return false;
+        }
+        return true;
+    }
+    boolean updateTrainingName(String oldName, String newName){
+        try{
+            String query = "UPDATE trainings SET training_name = '" + newName + "' WHERE training_name = '" + oldName + "'";
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+            statement.close();
+        }
+        catch (SQLException e){
+            e.getMessage();
+            return false;
+        }
+        return true;
+    }
+    ArrayList<ArrayList<String>> selectExercises(String training){
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM exercises WHERE training_name = ?");
+            ps.setString(1,training);
+            ResultSet result = ps.executeQuery();
+            ArrayList<ArrayList<String>> list = new ArrayList<>();
+            while (result.next()){
+                list.add(new ArrayList<>());
+                list.get(list.size()-1).add(result.getString(1));
+                list.get(list.size()-1).add(result.getString(2));
+                list.get(list.size()-1).add(result.getString(3));
+                list.get(list.size()-1).add(result.getString(4));
             }
-            else{
-                return false;
-            }
+            result.close();
+            ps.close();
+            return list;
         }
         catch (SQLException e){
             throw new RuntimeException(e);
         }
     }
+
 }

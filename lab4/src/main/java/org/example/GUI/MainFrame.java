@@ -1,5 +1,7 @@
 package org.example.GUI;
 
+import org.example.GUI.TrainingsPanel.TrainingsPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -34,7 +36,6 @@ public class MainFrame extends JFrame {
     }
     private void addExerciseTab(){
         try{
-
             URL exerciseTabIconPath = MainFrame.class.getClassLoader().getResource("exerciseTabIcon.png");
             ImageIcon icon = new ImageIcon(exerciseTabIconPath);
             Image iconScaled = icon.getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT);

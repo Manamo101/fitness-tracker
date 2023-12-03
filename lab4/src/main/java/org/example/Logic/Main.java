@@ -1,7 +1,8 @@
-package org.example.GUI;
+package org.example.Logic;
 
 import org.example.DataPersistence.DatabaseFunctionality;
 import org.example.DataPersistence.SQLiteFunctionality;
+import org.example.GUI.MainFrame;
 import org.example.Logic.ProgramOperation;
 
 public class Main {
