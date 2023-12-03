@@ -8,11 +8,13 @@ public class TrainingsPanel extends JPanel {
     public TrainingsPanel(){
         NorthPanel northPanel = new NorthPanel();
         CenterPanel centerPanel = new CenterPanel();
-        TrainingPanelActionListener al = new TrainingPanelActionListener(northPanel, centerPanel);
+        SouthPanel southPanel = new SouthPanel();
+        TrainingPanelActionListener al = new TrainingPanelActionListener(northPanel, centerPanel, southPanel);
         northPanel.setTrainingPanelActionListener(al);
+        southPanel.setTrainingPanelActionListener(al);
         this.setLayout(new BorderLayout());
         this.add(northPanel, BorderLayout.NORTH);
         this.add(centerPanel, BorderLayout.CENTER);
-        this.add(new JLabel("button"), BorderLayout.SOUTH);
+        this.add(southPanel, BorderLayout.SOUTH);
     }
 }

@@ -44,7 +44,25 @@ public class SQLiteQuery {
         try{
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT COUNT(training_name) FROM trainings WHERE training_name ='" + name + "'");
-            return result.getInt(1) != 0;
+            boolean bool = result.getInt(1) != 0;
+            result.close();
+            statement.close();
+            return bool;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    boolean doesExerciseNameExist(String exerciseName, String trainingName){
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT COUNT(training_name) FROM exercises WHERE name = ? AND training_name = ?");
+            ps.setString(1, exerciseName);
+            ps.setString(2, trainingName);
+            ResultSet result = ps.executeQuery();
+            boolean bool = result.getInt(1) != 0;
+            ps.close();
+            result.close();
+            return bool;
         }
         catch (SQLException e){
             throw new RuntimeException(e);
@@ -60,7 +78,7 @@ public class SQLiteQuery {
                 statement.close();
         }
         catch (SQLException e){
-            e.getMessage();
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -69,6 +87,12 @@ public class SQLiteQuery {
         try{
             Statement statement = connection.createStatement();
             statement.execute("DELETE FROM trainings WHERE training_name ='" + name + "'");
+
+            PreparedStatement ps2 = connection.prepareStatement("DELETE FROM exercises WHERE training_name = ?");
+            ps2.setString(1, name);
+            ps2.execute();
+            ps2.close();
+            statement.close();
         }
         catch (SQLException e){
             System.out.println("delete went wrong");
@@ -82,6 +106,12 @@ public class SQLiteQuery {
             Statement statement = connection.createStatement();
             statement.execute(query);
             statement.close();
+
+            PreparedStatement ps2 = connection.prepareStatement("UPDATE exercises SET training_name = ? WHERE training_name = ?");
+            ps2.setString(1, newName);
+            ps2.setString(2,oldName);
+            ps2.executeUpdate();
+            ps2.close();
         }
         catch (SQLException e){
             e.getMessage();

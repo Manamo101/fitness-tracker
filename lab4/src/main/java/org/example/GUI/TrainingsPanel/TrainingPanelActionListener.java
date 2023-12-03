@@ -11,9 +11,11 @@ public class TrainingPanelActionListener implements ActionListener {
     private final JComboBox<String> comboBox;
     private final JList<String> listing;
     private final NorthPanel northPanel;
+    private final SouthPanel southPanel;
 
-    TrainingPanelActionListener(NorthPanel northPanel, CenterPanel centerPanel){
+    TrainingPanelActionListener(NorthPanel northPanel, CenterPanel centerPanel, SouthPanel southPanel){
         this.northPanel = northPanel;
+        this.southPanel = southPanel;
         comboBox = northPanel.getComboBox();
         listing = centerPanel.getListing();
     }
@@ -48,6 +50,7 @@ public class TrainingPanelActionListener implements ActionListener {
                 comboBox.removeItem(name);
             }
         }
+
         if (e.getSource() == northPanel.getChangeTrainingNameButton()){
             Object oldName = comboBox.getSelectedItem();
             String newName;
@@ -71,6 +74,7 @@ public class TrainingPanelActionListener implements ActionListener {
                 comboBox.setSelectedIndex(i);
             }
         }
+
         if (e.getSource() == comboBox){
             List<String> list = ProgramOperation.listExercises((String)comboBox.getSelectedItem());
             DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -78,5 +82,24 @@ public class TrainingPanelActionListener implements ActionListener {
             listing.removeAll();
             listing.setModel(listModel);
         }
+
+//        if (e.getSource() == southPanel.getNewExerciseButton()){
+//            String exercise;
+//            boolean isFist = true;
+//            do{
+//                if (!isFist){
+//                    JOptionPane.showMessageDialog(null,"Existing exercise or invalid input!");
+//                }
+//                isFist = false;
+//                exercise = JOptionPane.showInputDialog(null,"Type training name:", "New training", JOptionPane.PLAIN_MESSAGE);
+//                if (exercise == null){
+//                    break;
+//                }
+//            }
+//            while (!ProgramOperation.addNewTraining(newTrainingName.trim()));
+//            if(newTrainingName != null){
+//
+//            }
+//        }
     }
 }
