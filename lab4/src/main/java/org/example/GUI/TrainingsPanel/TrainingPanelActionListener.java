@@ -9,15 +9,15 @@ import java.util.List;
 
 public class TrainingPanelActionListener implements ActionListener {
     private final JComboBox<String> comboBox;
-    private final JList<String> listing;
     private final NorthPanel northPanel;
+    private final CenterPanel centerPanel;
     private final SouthPanel southPanel;
 
     TrainingPanelActionListener(NorthPanel northPanel, CenterPanel centerPanel, SouthPanel southPanel){
         this.northPanel = northPanel;
-        this.southPanel = southPanel;
         comboBox = northPanel.getComboBox();
-        listing = centerPanel.getListing();
+        this.centerPanel = centerPanel;
+        this.southPanel = southPanel;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -79,11 +79,12 @@ public class TrainingPanelActionListener implements ActionListener {
             List<String> list = ProgramOperation.listExercises((String)comboBox.getSelectedItem());
             DefaultListModel<String> listModel = new DefaultListModel<>();
             listModel.addAll(list);
-            listing.removeAll();
-            listing.setModel(listModel);
+            centerPanel.getListing().removeAll();
+            centerPanel.getListing().setModel(listModel);
         }
 
-//        if (e.getSource() == southPanel.getNewExerciseButton()){
+        if (e.getSource() == southPanel.getNewExerciseButton()){
+            new ExerciseController(ExerciseController.NEW_EXERCISE, centerPanel.getListing());
 //            String exercise;
 //            boolean isFist = true;
 //            do{
@@ -100,6 +101,6 @@ public class TrainingPanelActionListener implements ActionListener {
 //            if(newTrainingName != null){
 //
 //            }
-//        }
+        }
     }
 }

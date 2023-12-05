@@ -1,6 +1,6 @@
 package org.example.GUI;
 
-import org.example.GUI.TrainingsPanel.TrainingsPanel;
+import org.example.GUI.TrainingsPanel.TrainingPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,11 +39,11 @@ public class MainFrame extends JFrame {
             URL exerciseTabIconPath = MainFrame.class.getClassLoader().getResource("exerciseTabIcon.png");
             ImageIcon icon = new ImageIcon(exerciseTabIconPath);
             Image iconScaled = icon.getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT);
-            tabbedPane.addTab("Trainings", new ImageIcon(iconScaled),new TrainingsPanel());
+            tabbedPane.addTab("Trainings", new ImageIcon(iconScaled),new TrainingPanel());
         }
         catch (NullPointerException e){
             System.out.println("image is not found");
-            tabbedPane.addTab("Trainings", new TrainingsPanel());
+            tabbedPane.addTab("Trainings", new TrainingPanel());
         }
     }
 

@@ -3,9 +3,9 @@ package org.example.GUI.TrainingsPanel;
 import javax.swing.*;
 import java.awt.*;
 
-public class TrainingsPanel extends JPanel {
+public class TrainingPanel extends JPanel {
 
-    public TrainingsPanel(){
+    public TrainingPanel(){
         NorthPanel northPanel = new NorthPanel();
         CenterPanel centerPanel = new CenterPanel();
         SouthPanel southPanel = new SouthPanel();

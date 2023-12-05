@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.example.GUI.TrainingsPanel.ExerciseController">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="31" y="31" width="674" height="400"/>
+    </constraints>
+    <properties>
+      <doubleBuffered value="true"/>
+      <enabled value="true"/>
+      <inheritsPopupMenu value="false"/>
+      <maximumSize width="1000" height="1000"/>
+      <minimumSize width="400" height="300"/>
+      <preferredSize width="400" height="300"/>
+      <requestFocusEnabled value="false"/>
+      <visible value="true"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="74fe7" layout-manager="FlowLayout" hgap="10" vgap="5" flow-align="0">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none" title=""/>
+        <children>
+          <component id="a89ce" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <font size="12"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <text value="Type name"/>
+            </properties>
+          </component>
+          <component id="355bb" class="javax.swing.JTextField" binding="exerciseTextField" default-binding="true">
+            <constraints/>
+            <properties>
+              <horizontalAlignment value="2"/>
+              <minimumSize width="50" height="30"/>
+              <preferredSize width="50" height="25"/>
+              <text value=""/>
+            </properties>
+          </component>
+          <vspacer id="69ac2">
+            <constraints/>
+          </vspacer>
+          <hspacer id="2a5a6">
+            <constraints/>
+          </hspacer>
+          <hspacer id="e43a4">
+            <constraints/>
+          </hspacer>
+          <hspacer id="9246b">
+            <constraints/>
+          </hspacer>
+          <hspacer id="d4ee6">
+            <constraints/>
+          </hspacer>
+          <hspacer id="a58f2">
+            <constraints/>
+          </hspacer>
+          <hspacer id="9d317">
+            <constraints/>
+          </hspacer>
+          <hspacer id="f36fd">
+            <constraints/>
+          </hspacer>
+          <hspacer id="cbb80">
+            <constraints/>
+          </hspacer>
+          <hspacer id="84949">
+            <constraints/>
+          </hspacer>
+          <hspacer id="91782">
+            <constraints/>
+          </hspacer>
+          <hspacer id="88c1f">
+            <constraints/>
+          </hspacer>
+          <component id="b33a9" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <preferredSize width="65" height="17"/>
+              <text value="amount of"/>
+            </properties>
+          </component>
+          <component id="48d3" class="javax.swing.JRadioButton" binding="repetitionsRadioButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="repetitions"/>
+            </properties>
+          </component>
+          <component id="cbba7" class="javax.swing.JRadioButton" binding="timeRadioButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="time"/>
+            </properties>
+          </component>
+          <component id="5a60a" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+            <constraints/>
+            <properties>
+              <preferredSize width="50" height="25"/>
+            </properties>
+          </component>
+          <component id="53cb8" class="javax.swing.JCheckBox" binding="loadingCheckBox" default-binding="true">
+            <constraints/>
+            <properties>
+              <borderPaintedFlat value="false"/>
+              <contentAreaFilled value="true"/>
+              <horizontalTextPosition value="2"/>
+              <rolloverEnabled value="true"/>
+              <selected value="false"/>
+              <text value="loading"/>
+            </properties>
+          </component>
+          <component id="462d9" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+            <constraints/>
+            <properties>
+              <preferredSize width="50" height="25"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="6281" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="West"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <vspacer id="b3f6c">
+            <constraints/>
+          </vspacer>
+          <vspacer id="230ed">
+            <constraints/>
+          </vspacer>
+          <vspacer id="529b5">
+            <constraints/>
+          </vspacer>
+          <vspacer id="7500e">
+            <constraints/>
+          </vspacer>
+          <hspacer id="7e696">
+            <constraints/>
+          </hspacer>
+          <hspacer id="d7fd8">
+            <constraints/>
+          </hspacer>
+          <hspacer id="2fd3f">
+            <constraints/>
+          </hspacer>
+        </children>
+      </grid>
+      <grid id="305c1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <vspacer id="dc4da">
+            <constraints/>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="bd2c" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <vspacer id="d010b">
+            <constraints/>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="3b3b4" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="East"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <hspacer id="1cef4">
+            <constraints/>
+          </hspacer>
+          <hspacer id="dd0b5">
+            <constraints/>
+          </hspacer>
+          <hspacer id="536d">
+            <constraints/>
+          </hspacer>
+          <hspacer id="56252">
+            <constraints/>
+          </hspacer>
+          <hspacer id="ecf26">
+            <constraints/>
+          </hspacer>
+          <hspacer id="e4bad">
+            <constraints/>
+          </hspacer>
+          <hspacer id="aa39f">
+            <constraints/>
+          </hspacer>
+          <hspacer id="810d5">
+            <constraints/>
+          </hspacer>
+        </children>
+      </grid>
+    </children>
+  </grid>
+  <buttonGroups>
+    <group name="buttonGroup1">
+      <member id="48d3"/>
+      <member id="cbba7"/>
+    </group>
+  </buttonGroups>
+</form>
