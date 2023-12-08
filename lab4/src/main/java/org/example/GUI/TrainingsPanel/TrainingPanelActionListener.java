@@ -3,11 +3,13 @@ package org.example.GUI.TrainingsPanel;
 import org.example.Logic.ProgramOperation;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class TrainingPanelActionListener implements ActionListener {
+public class TrainingPanelActionListener implements ActionListener, ListSelectionListener {
     private final JComboBox<String> comboBox;
     private final NorthPanel northPanel;
     private final CenterPanel centerPanel;
@@ -34,9 +36,9 @@ public class TrainingPanelActionListener implements ActionListener {
                     break;
                 }
             }
-            while (!ProgramOperation.addNewTraining(newTrainingName.trim()));
+            while (!ProgramOperation.addNewTraining(newTrainingName.toLowerCase().trim()));
             if(newTrainingName != null){
-                comboBox.addItem(newTrainingName.trim());
+                comboBox.addItem(newTrainingName.toLowerCase().trim());
                 comboBox.setSelectedItem(newTrainingName);
             }
         }
@@ -84,23 +86,16 @@ public class TrainingPanelActionListener implements ActionListener {
         }
 
         if (e.getSource() == southPanel.getNewExerciseButton()){
-            new ExerciseController(ExerciseController.NEW_EXERCISE, centerPanel.getListing());
-//            String exercise;
-//            boolean isFist = true;
-//            do{
-//                if (!isFist){
-//                    JOptionPane.showMessageDialog(null,"Existing exercise or invalid input!");
-//                }
-//                isFist = false;
-//                exercise = JOptionPane.showInputDialog(null,"Type training name:", "New training", JOptionPane.PLAIN_MESSAGE);
-//                if (exercise == null){
-//                    break;
-//                }
-//            }
-//            while (!ProgramOperation.addNewTraining(newTrainingName.trim()));
-//            if(newTrainingName != null){
-//
-//            }
+            new ExerciseController(centerPanel.getListing(), ExerciseController.NEW_EXERCISE);
+        }
+        if (e.getSource() == southPanel.getChangeExerciseButton()){
+            new ExerciseController(centerPanel.getListing(), ExerciseController.MODIFY_EXERCISE);
+        }
+    }
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (e.getSource() == centerPanel.getListing()){
+            southPanel.setButtonAccessibility(!centerPanel.getListing().isSelectionEmpty());
         }
     }
 }

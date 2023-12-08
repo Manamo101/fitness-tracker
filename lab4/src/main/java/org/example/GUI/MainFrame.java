@@ -1,5 +1,6 @@
 package org.example.GUI;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import org.example.GUI.TrainingsPanel.TrainingPanel;
 
 import javax.swing.*;
@@ -9,6 +10,16 @@ import java.net.URL;
 public class MainFrame extends JFrame {
     private final JTabbedPane tabbedPane;
     public MainFrame(String name){
+        try {
+//            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+//            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf");
+//            UIManager.setLookAndFeel("com.formdev.flatlaf.themes.FlatMacLightLaf");
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatIntelliJLaf");
+
+        } catch (Exception e) {
+
+            throw new RuntimeException(e);
+        }
         tabbedPane = new JTabbedPane();
         tabbedPane.setFocusable(false);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);

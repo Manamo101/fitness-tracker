@@ -19,6 +19,9 @@ class CenterPanel extends JPanel{
         this.add(scrollPane);
         this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
     }
+    public void setTrainingPanelActionListener(TrainingPanelActionListener trainingPanelActionListener) {
+        listing.addListSelectionListener(trainingPanelActionListener);
+    }
     public JList<String> getListing() {
         return listing;
     }

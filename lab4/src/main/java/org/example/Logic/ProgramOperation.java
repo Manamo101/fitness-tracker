@@ -3,9 +3,38 @@ package org.example.Logic;
 import org.example.DataPersistence.DatabaseFunctionality;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class ProgramOperation {
     private static DatabaseFunctionality database;
+
+    public static HashMap<String, String> getListedRecord(String str){
+        HashMap<String,String> hashMap = new HashMap<>();
+        Scanner scanner = new Scanner(str);
+        String exercise = "";
+        String name;
+        while (scanner.hasNext()){
+            name = scanner.next();
+            if (name.endsWith("X") || name.endsWith("sec")){
+                if (name.endsWith("X")){
+                    hashMap.put("timeRep", "X");
+                }
+                else{
+                    hashMap.put("timeRep", "sec");
+                }
+                hashMap.put("amount", name.replace("sec","").replace("X",""));
+                break;
+            }
+            else {
+                exercise =exercise.concat(" ").concat(name);
+//                exercise += " " + name;
+            }
+        }
+        hashMap.put("exercise", exercise.trim());
+        hashMap.put("loading", scanner.hasNext() ? scanner.next().replace("kg","") : null);
+        return hashMap;
+    }
 
     public static void setDatabase(DatabaseFunctionality db){
         database = db;
@@ -21,8 +50,8 @@ public class ProgramOperation {
             return database.addNewTraining(name);
         }
     }
-    public static boolean deleteTraining(String name){
-        return database.deleteTrainingName(name);
+    public static void deleteTraining(String name){
+        database.deleteTrainingName(name);
     }
     public static boolean changeTrainingName(String oldName, String newName){
         if(newName.isBlank() || database.doesTrainingNameExist(newName)){
@@ -39,10 +68,10 @@ public class ProgramOperation {
             String name, repetitions = "", time = "", loading = "";
             name= record.get(0).concat("  ");
             if (record.get(1) != null){
-                repetitions = record.get(1).concat("x   ");
+                repetitions = record.get(1).concat("X   ");
             }
             if(record.get(2) != null){
-                time = record.get(2).concat("s   ");
+                time = record.get(2).concat("sec   ");
             }
             if(record.get(3) != null){
                 loading = record.get(3).concat("kg   ");
