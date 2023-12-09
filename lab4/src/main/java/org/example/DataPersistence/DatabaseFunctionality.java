@@ -1,12 +1,17 @@
 package org.example.DataPersistence;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface DatabaseFunctionality {
     String[] trainingNames();
     boolean addNewTraining(String name);
-    boolean deleteTrainingName(String name);
+    void deleteTrainingName(String name);
     boolean doesTrainingNameExist(String name);
+    boolean doesExerciseNameExist(String exerciseName, String trainingName);
     boolean changeTrainingName(String oldName, String newName);
     ArrayList<ArrayList<String>> listExercises(String trainingName);
+    void addExercise(HashMap<String, String> hashMap, String trainingName);
+    void modifyExercise(HashMap<String, String> hashMap, String trainingName, String oldName);
+    void deleteExercise(String trainingName, String exerciseName);
 }

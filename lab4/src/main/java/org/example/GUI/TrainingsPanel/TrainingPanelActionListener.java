@@ -70,7 +70,6 @@ public class TrainingPanelActionListener implements ActionListener, ListSelectio
             while (!ProgramOperation.changeTrainingName((String) oldName, newName.trim()));
             if(newName != null){
                 int i = comboBox.getSelectedIndex();
-                System.out.println(i);
                 comboBox.removeItemAt(i);
                 comboBox.insertItemAt(newName, i);
                 comboBox.setSelectedIndex(i);
@@ -86,10 +85,18 @@ public class TrainingPanelActionListener implements ActionListener, ListSelectio
         }
 
         if (e.getSource() == southPanel.getNewExerciseButton()){
-            new ExerciseController(centerPanel.getListing(), ExerciseController.NEW_EXERCISE);
+            new ExerciseController(centerPanel.getListing(),comboBox, (String) northPanel.getComboBox().getSelectedItem(), ExerciseController.NEW_EXERCISE);
         }
         if (e.getSource() == southPanel.getChangeExerciseButton()){
-            new ExerciseController(centerPanel.getListing(), ExerciseController.MODIFY_EXERCISE);
+            new ExerciseController(centerPanel.getListing(), comboBox, (String) northPanel.getComboBox().getSelectedItem(), ExerciseController.MODIFY_EXERCISE);
+        }
+
+        if (e.getSource() == southPanel.getDeleteExerciseButton()) {
+            int answer = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this exercise?", "delete exercise", JOptionPane.OK_CANCEL_OPTION);
+            if (answer == 0){
+                ProgramOperation.deleteExercise((String) comboBox.getSelectedItem(), centerPanel.getListing().getSelectedValue());
+                comboBox.setSelectedIndex(comboBox.getSelectedIndex());
+            }
         }
     }
     @Override

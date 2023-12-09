@@ -28,7 +28,6 @@ public class ProgramOperation {
             }
             else {
                 exercise =exercise.concat(" ").concat(name);
-//                exercise += " " + name;
             }
         }
         hashMap.put("exercise", exercise.trim());
@@ -79,5 +78,20 @@ public class ProgramOperation {
             output.add(name + repetitions + time + loading);
         }
         return output;
+    }
+    public static boolean addExercise(HashMap<String, String> hashMap, String trainingName){
+        if (!database.doesExerciseNameExist(hashMap.get("exercise"), trainingName)){
+            database.addExercise(hashMap, trainingName);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public static void modifyExercise(HashMap<String, String> hashMap, String trainingName, String oldName){
+        database.modifyExercise(hashMap, trainingName, oldName);
+    }
+    public static void deleteExercise(String trainingName, String exerciseName){
+        database.deleteExercise(trainingName, new Scanner(exerciseName).next());
     }
 }

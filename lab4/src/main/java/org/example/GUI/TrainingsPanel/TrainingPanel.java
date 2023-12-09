@@ -7,7 +7,7 @@ public class TrainingPanel extends JPanel {
 
     public TrainingPanel(){
         NorthPanel northPanel = new NorthPanel();
-        CenterPanel centerPanel = new CenterPanel();
+        CenterPanel centerPanel = new CenterPanel(northPanel.getComboBox());
         SouthPanel southPanel = new SouthPanel();
         TrainingPanelActionListener al = new TrainingPanelActionListener(northPanel, centerPanel, southPanel);
         northPanel.setTrainingPanelActionListener(al);

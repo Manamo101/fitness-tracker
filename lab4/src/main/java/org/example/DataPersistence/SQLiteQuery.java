@@ -2,6 +2,7 @@ package org.example.DataPersistence;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SQLiteQuery {
@@ -76,29 +77,32 @@ public class SQLiteQuery {
                 ps.executeUpdate();
                 ps.close();
                 statement.close();
+                return true;
         }
         catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("inserting training went wrong");
             return false;
         }
-        return true;
     }
-    boolean deleteTrainingName(String name){
+    void deleteTrainingName(String name){
         try{
-            Statement statement = connection.createStatement();
-            statement.execute("DELETE FROM trainings WHERE training_name ='" + name + "'");
+            PreparedStatement ps1 = connection.prepareStatement("DELETE FROM trainings WHERE training_name = ?");
+            ps1.setString(1, name);
+            ps1.execute();
+            ps1.close();
+
+//            Statement statement = connection.createStatement();
+//            statement.execute("DELETE FROM trainings WHERE training_name ='" + name + "'");
 
             PreparedStatement ps2 = connection.prepareStatement("DELETE FROM exercises WHERE training_name = ?");
             ps2.setString(1, name);
             ps2.execute();
             ps2.close();
-            statement.close();
+//          statement.close();
         }
         catch (SQLException e){
-            System.out.println("delete went wrong");
-            return false;
+            System.out.println("removing training went wrong");
         }
-        return true;
     }
     boolean updateTrainingName(String oldName, String newName){
         try{
@@ -108,13 +112,15 @@ public class SQLiteQuery {
             statement.close();
 
             PreparedStatement ps2 = connection.prepareStatement("UPDATE exercises SET training_name = ? WHERE training_name = ?");
+
+
             ps2.setString(1, newName);
             ps2.setString(2,oldName);
             ps2.executeUpdate();
             ps2.close();
         }
         catch (SQLException e){
-            e.getMessage();
+            System.out.println("updateTrainingName() went wrong");
             return false;
         }
         return true;
@@ -135,6 +141,59 @@ public class SQLiteQuery {
             result.close();
             ps.close();
             return list;
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    void addExercise(HashMap<String, String> hashMap, String trainingName){
+        try{
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO exercises VALUES (?,?,?,?,?)");
+            ps.setString(1, hashMap.get("exercise"));
+            int index = hashMap.get("timeRep").equals("X") ? 2 : 3;
+            ps.setInt(index, Integer.parseInt(hashMap.get("amount")));
+            if (hashMap.get("loading") != null){
+                ps.setInt(4, Integer.parseInt(hashMap.get("loading")));
+            }
+            ps.setString(5, trainingName);
+            ps.executeUpdate();
+            ps.close();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    void modifyExercise(HashMap<String, String> hashMap, String trainingName, String oldName){
+        try{
+            PreparedStatement ps = connection.prepareStatement("UPDATE exercises SET " +
+                                                                    "name = ?, " +
+                                                                    "repetitions = ?," +
+                                                                    "time = ?," +
+                                                                    "loading = ?," +
+                                                                    "training_name = ?" +
+                                                                    "WHERE name = ?");
+            ps.setString(1, hashMap.get("exercise"));
+            int index = hashMap.get("timeRep").equals("X") ? 2 : 3;
+            ps.setInt(index, Integer.parseInt(hashMap.get("amount")));
+            if (hashMap.get("loading") != null){
+                ps.setInt(4, Integer.parseInt(hashMap.get("loading")));
+            }
+            ps.setString(5, trainingName);
+            ps.setString(6, oldName);
+            ps.executeUpdate();
+            ps.close();
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    void deleteExercise(String trainingName, String exerciseName){
+        try {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM exercises WHERE name = ? AND training_name = ?");
+            ps.setString(1, exerciseName);
+            ps.setString(2, trainingName);
+            ps.execute();
+            ps.close();
         }
         catch (SQLException e){
             throw new RuntimeException(e);

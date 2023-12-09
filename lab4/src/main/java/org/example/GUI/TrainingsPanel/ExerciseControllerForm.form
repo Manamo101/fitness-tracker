@@ -20,6 +20,7 @@
         <constraints border-constraint="Center"/>
         <properties>
           <focusable value="false"/>
+          <minimumSize width="10" height="42"/>
         </properties>
         <border type="none" title=""/>
         <children>
@@ -41,43 +42,14 @@
               <text value=""/>
             </properties>
           </component>
-          <hspacer id="2a5a6">
-            <constraints/>
-          </hspacer>
-          <hspacer id="e43a4">
-            <constraints/>
-          </hspacer>
-          <hspacer id="9246b">
-            <constraints/>
-          </hspacer>
-          <hspacer id="d4ee6">
-            <constraints/>
-          </hspacer>
-          <hspacer id="a58f2">
-            <constraints/>
-          </hspacer>
-          <hspacer id="9d317">
-            <constraints/>
-          </hspacer>
-          <hspacer id="f36fd">
-            <constraints/>
-          </hspacer>
-          <hspacer id="cbb80">
-            <constraints/>
-          </hspacer>
-          <hspacer id="84949">
-            <constraints/>
-          </hspacer>
-          <hspacer id="91782">
-            <constraints/>
-          </hspacer>
-          <component id="b33a9" class="javax.swing.JLabel">
+          <grid id="aabe1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
             <constraints/>
             <properties>
-              <preferredSize width="63" height="17"/>
-              <text value="amount of"/>
+              <preferredSize width="40" height="10"/>
             </properties>
-          </component>
+            <border type="none"/>
+            <children/>
+          </grid>
           <component id="48d3" class="javax.swing.JRadioButton" binding="repetitionsRadioButton" default-binding="true">
             <constraints/>
             <properties>
@@ -117,43 +89,19 @@
               <preferredSize width="50" height="25"/>
             </properties>
           </component>
-          <hspacer id="6282f">
-            <constraints/>
-          </hspacer>
-          <hspacer id="909db">
-            <constraints/>
-          </hspacer>
-          <hspacer id="1de04">
-            <constraints/>
-          </hspacer>
-          <hspacer id="ac301">
-            <constraints/>
-          </hspacer>
-          <hspacer id="91e20">
-            <constraints/>
-          </hspacer>
-          <hspacer id="ef7af">
-            <constraints/>
-          </hspacer>
-          <hspacer id="f395">
-            <constraints/>
-          </hspacer>
-          <hspacer id="c2e64">
-            <constraints/>
-          </hspacer>
-          <hspacer id="840fd">
-            <constraints/>
-          </hspacer>
-          <hspacer id="19140">
-            <constraints/>
-          </hspacer>
-          <hspacer id="81658">
-            <constraints/>
-          </hspacer>
           <grid id="829a0" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
             <constraints/>
             <properties>
-              <preferredSize width="100" height="10"/>
+              <preferredSize width="300" height="10"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="5150c" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints/>
+            <properties>
+              <minimumSize width="10" height="10"/>
+              <preferredSize width="60" height="10"/>
             </properties>
             <border type="none"/>
             <children/>
@@ -174,86 +122,42 @@
               <text value="modify"/>
             </properties>
           </component>
+          <component id="46a8b" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <focusable value="false"/>
+              <text value="cancel"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="6281" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints border-constraint="West"/>
-        <properties/>
+        <properties>
+          <preferredSize width="60" height="20"/>
+        </properties>
         <border type="none"/>
-        <children>
-          <vspacer id="b3f6c">
-            <constraints/>
-          </vspacer>
-          <vspacer id="230ed">
-            <constraints/>
-          </vspacer>
-          <vspacer id="529b5">
-            <constraints/>
-          </vspacer>
-          <vspacer id="7500e">
-            <constraints/>
-          </vspacer>
-          <hspacer id="7e696">
-            <constraints/>
-          </hspacer>
-          <hspacer id="d7fd8">
-            <constraints/>
-          </hspacer>
-          <hspacer id="2fd3f">
-            <constraints/>
-          </hspacer>
-        </children>
+        <children/>
       </grid>
       <grid id="305c1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints border-constraint="South"/>
         <properties/>
         <border type="none"/>
-        <children>
-          <vspacer id="dc4da">
-            <constraints/>
-          </vspacer>
-        </children>
+        <children/>
       </grid>
       <grid id="bd2c" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints border-constraint="North"/>
         <properties/>
         <border type="none"/>
-        <children>
-          <vspacer id="d010b">
-            <constraints/>
-          </vspacer>
-        </children>
+        <children/>
       </grid>
       <grid id="3b3b4" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints border-constraint="East"/>
-        <properties/>
+        <properties>
+          <preferredSize width="60" height="10"/>
+        </properties>
         <border type="none"/>
-        <children>
-          <hspacer id="1cef4">
-            <constraints/>
-          </hspacer>
-          <hspacer id="dd0b5">
-            <constraints/>
-          </hspacer>
-          <hspacer id="536d">
-            <constraints/>
-          </hspacer>
-          <hspacer id="56252">
-            <constraints/>
-          </hspacer>
-          <hspacer id="ecf26">
-            <constraints/>
-          </hspacer>
-          <hspacer id="e4bad">
-            <constraints/>
-          </hspacer>
-          <hspacer id="aa39f">
-            <constraints/>
-          </hspacer>
-          <hspacer id="810d5">
-            <constraints/>
-          </hspacer>
-        </children>
+        <children/>
       </grid>
     </children>
   </grid>
