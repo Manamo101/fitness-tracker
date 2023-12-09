@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface DatabaseFunctionality {
+//    boolean doesDatabaseExist(String databaseName);
     String[] trainingNames();
     boolean addNewTraining(String name);
     void deleteTrainingName(String name);

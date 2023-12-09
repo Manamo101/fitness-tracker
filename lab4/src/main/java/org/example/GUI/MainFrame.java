@@ -1,17 +1,31 @@
 package org.example.GUI;
 
+import com.formdev.flatlaf.FlatDefaultsAddon;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import org.example.DataPersistence.DatabaseFunctionality;
+import org.example.DataPersistence.SQLiteFunctionality;
+import org.example.DataPersistence.SQLiteQuery;
 import org.example.GUI.TrainingsPanel.TrainingPanel;
+import org.example.Logic.ProgramOperation;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.net.URL;
 
 public class MainFrame extends JFrame {
     private final JTabbedPane tabbedPane;
     public MainFrame(String name){
+/*
+FlatLaf Light (class com.formdev.flatlaf.FlatLightLaf)
+FlatLaf Dark (class com.formdev.flatlaf.FlatDarkLaf)
+FlatLaf IntelliJ (based on FlatLaf Light) looks like IntelliJ theme from IntelliJ IDEA 2019.2+ (class com.formdev.flatlaf.FlatIntelliJLaf)
+FlatLaf Darcula (based on FlatLaf Dark) looks like Darcula theme from IntelliJ IDEA 2019.2+ (class com.formdev.flatlaf.FlatDarculaLaf)
+FlatLaf macOS Light v3 (class com.formdev.flatlaf.themes.FlatMacLightLaf)
+FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
+*/
         try {
-//            javax.swing.plaf.basic.BasicLookAndFeel
 //            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel"); //a'la stare macos
 //            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatLightLaf"); // jak intellijLaf tyle że węższe odstępy między komponentami
 //            UIManager.setLookAndFeel("com.formdev.flatlaf.themes.FlatMacLightLaf"); // spoko
@@ -36,11 +50,38 @@ public class MainFrame extends JFrame {
         catch (NullPointerException e){
             System.out.println("no icon found");
         }
+        databaseFileSelector();
         this.add(tabbedPane);
         addExerciseTab();
         addSessionTab();
         addGoalsTab();
         addStatsTab();
+    }
+    private void databaseFileSelector(){
+        JFileChooser fileChooser = new JFileChooser(".");
+        String path;
+        DatabaseFunctionality database;
+        boolean isFirst = true;
+        boolean isGood = false;
+        do{
+            if (!isFirst){
+                JOptionPane.showMessageDialog(this, "invalid file", "ERROR", JOptionPane.PLAIN_MESSAGE);
+            }
+            isFirst = false;
+            int respond = fileChooser.showOpenDialog(this);
+            if (respond == JFileChooser.APPROVE_OPTION){
+                path = fileChooser.getSelectedFile().getAbsolutePath();
+                if(SQLiteFunctionality.doesDatabaseExist(path)){
+                    database = new SQLiteFunctionality(path);
+                    ProgramOperation.setDatabase(database);
+                    isGood = true;
+                }
+            }
+            else{
+                System.exit(1);
+            }
+        }
+        while(!isGood);
     }
     private void addExerciseTab(){
         try{

@@ -6,8 +6,10 @@ import java.util.HashMap;
 public class SQLiteFunctionality implements DatabaseFunctionality{
     private final SQLiteQuery sqliteQuery;
     public SQLiteFunctionality(String databaseName){
-        SQLiteConnection sqliteConnection = new SQLiteConnection(databaseName);
-        sqliteQuery = new SQLiteQuery(sqliteConnection.getConnection());
+        sqliteQuery = new SQLiteQuery(databaseName);
+    }
+    public static boolean doesDatabaseExist(String databaseName){
+        return SQLiteQuery.doesExist(databaseName);
     }
     public String[] trainingNames(){
         return sqliteQuery.SelectTrainingNames();

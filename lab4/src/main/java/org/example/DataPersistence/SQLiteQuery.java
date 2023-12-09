@@ -6,27 +6,30 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SQLiteQuery {
-    private final Connection connection;
-    SQLiteQuery(Connection connection){
-        this.connection = connection;
+//    private Connection connection;
+    private final String databaseName;
+    SQLiteQuery(String databaseName){
+        this.databaseName = databaseName;
     }
-
-    static boolean doesExist(Connection connection){
+    static boolean doesExist(String databaseName){
         try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT COUNT(name) FROM sqlite_master WHERE name='trainings'");
-            boolean exists = result.getInt("COUNT(name)") == 1;
+            ResultSet result = statement.executeQuery("SELECT COUNT(name) FROM sqlite_master WHERE name = 'trainings' OR name = 'exercises'");
+            boolean exists = result.getInt("COUNT(name)") == 2;
             result.close();
             statement.close();
+            connection.close();
             return exists;
         }
         catch (SQLException e){
-            throw new RuntimeException(e);
+            return false;
         }
     }
 
     String[] SelectTrainingNames(){
         try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT training_name FROM trainings");
             List<String> list = new ArrayList<>();
@@ -35,6 +38,7 @@ public class SQLiteQuery {
             }
             result.close();
             statement.close();
+            connection.close();
             return list.toArray(new String[list.size()]);
         }
         catch (SQLException e){
@@ -43,11 +47,13 @@ public class SQLiteQuery {
     }
     boolean doesTrainingNameExist(String name){
         try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT COUNT(training_name) FROM trainings WHERE training_name ='" + name + "'");
             boolean bool = result.getInt(1) != 0;
             result.close();
             statement.close();
+            connection.close();
             return bool;
         }
         catch (SQLException e){
@@ -56,6 +62,7 @@ public class SQLiteQuery {
     }
     boolean doesExerciseNameExist(String exerciseName, String trainingName){
         try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             PreparedStatement ps = connection.prepareStatement("SELECT COUNT(training_name) FROM exercises WHERE name = ? AND training_name = ?");
             ps.setString(1, exerciseName);
             ps.setString(2, trainingName);
@@ -63,6 +70,7 @@ public class SQLiteQuery {
             boolean bool = result.getInt(1) != 0;
             ps.close();
             result.close();
+            connection.close();
             return bool;
         }
         catch (SQLException e){
@@ -71,13 +79,15 @@ public class SQLiteQuery {
     }
     boolean insertNewTrainingName(String name){
         try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             Statement statement = connection.createStatement();
                 PreparedStatement ps = connection.prepareStatement("INSERT INTO trainings VALUES (?)");
                 ps.setString(1, name.trim());
                 ps.executeUpdate();
                 ps.close();
                 statement.close();
-                return true;
+                connection.close();
+            return true;
         }
         catch (SQLException e){
             System.out.println("inserting training went wrong");
@@ -86,19 +96,17 @@ public class SQLiteQuery {
     }
     void deleteTrainingName(String name){
         try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             PreparedStatement ps1 = connection.prepareStatement("DELETE FROM trainings WHERE training_name = ?");
             ps1.setString(1, name);
             ps1.execute();
             ps1.close();
 
-//            Statement statement = connection.createStatement();
-//            statement.execute("DELETE FROM trainings WHERE training_name ='" + name + "'");
-
             PreparedStatement ps2 = connection.prepareStatement("DELETE FROM exercises WHERE training_name = ?");
             ps2.setString(1, name);
             ps2.execute();
             ps2.close();
-//          statement.close();
+            connection.close();
         }
         catch (SQLException e){
             System.out.println("removing training went wrong");
@@ -106,6 +114,7 @@ public class SQLiteQuery {
     }
     boolean updateTrainingName(String oldName, String newName){
         try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             String query = "UPDATE trainings SET training_name = '" + newName + "' WHERE training_name = '" + oldName + "'";
             Statement statement = connection.createStatement();
             statement.execute(query);
@@ -113,11 +122,11 @@ public class SQLiteQuery {
 
             PreparedStatement ps2 = connection.prepareStatement("UPDATE exercises SET training_name = ? WHERE training_name = ?");
 
-
             ps2.setString(1, newName);
             ps2.setString(2,oldName);
             ps2.executeUpdate();
             ps2.close();
+            connection.close();
         }
         catch (SQLException e){
             System.out.println("updateTrainingName() went wrong");
@@ -127,6 +136,7 @@ public class SQLiteQuery {
     }
     ArrayList<ArrayList<String>> selectExercises(String training){
         try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM exercises WHERE training_name = ?");
             ps.setString(1,training);
             ResultSet result = ps.executeQuery();
@@ -140,6 +150,7 @@ public class SQLiteQuery {
             }
             result.close();
             ps.close();
+            connection.close();
             return list;
         }
         catch (SQLException e){
@@ -148,6 +159,7 @@ public class SQLiteQuery {
     }
     void addExercise(HashMap<String, String> hashMap, String trainingName){
         try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             PreparedStatement ps = connection.prepareStatement("INSERT INTO exercises VALUES (?,?,?,?,?)");
             ps.setString(1, hashMap.get("exercise"));
             int index = hashMap.get("timeRep").equals("X") ? 2 : 3;
@@ -158,6 +170,7 @@ public class SQLiteQuery {
             ps.setString(5, trainingName);
             ps.executeUpdate();
             ps.close();
+            connection.close();
         }
         catch (SQLException e){
             throw new RuntimeException(e);
@@ -165,6 +178,7 @@ public class SQLiteQuery {
     }
     void modifyExercise(HashMap<String, String> hashMap, String trainingName, String oldName){
         try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             PreparedStatement ps = connection.prepareStatement("UPDATE exercises SET " +
                                                                     "name = ?, " +
                                                                     "repetitions = ?," +
@@ -182,6 +196,7 @@ public class SQLiteQuery {
             ps.setString(6, oldName);
             ps.executeUpdate();
             ps.close();
+            connection.close();
         }
         catch (SQLException e){
             throw new RuntimeException(e);
@@ -189,11 +204,13 @@ public class SQLiteQuery {
     }
     void deleteExercise(String trainingName, String exerciseName){
         try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             PreparedStatement ps = connection.prepareStatement("DELETE FROM exercises WHERE name = ? AND training_name = ?");
             ps.setString(1, exerciseName);
             ps.setString(2, trainingName);
             ps.execute();
             ps.close();
+            connection.close();
         }
         catch (SQLException e){
             throw new RuntimeException(e);
