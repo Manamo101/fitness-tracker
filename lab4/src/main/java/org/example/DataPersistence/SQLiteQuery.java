@@ -215,6 +215,27 @@ public class SQLiteQuery {
             throw new RuntimeException(e);
         }
     }
+    ArrayList<ArrayList<String>> selectSessions(){
+        try{
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM sessions");
+            ResultSet result = ps.executeQuery();
+            ArrayList<ArrayList<String>> list = new ArrayList<>();
+            while (result.next()) {
+                list.add(new ArrayList<>());
+                list.get(list.size() - 1).add(result.getString(1));
+                list.get(list.size() - 1).add(result.getString(2));
+                list.get(list.size() - 1).add(result.getString(3));
+            }
+            result.close();
+            ps.close();
+            connection.close();
+            return list;
+        }
+        catch (SQLException e){
+            throw new RuntimeException();
+        }
+    }
 
     boolean addSession(String trainingName, String date, String time){
         try {

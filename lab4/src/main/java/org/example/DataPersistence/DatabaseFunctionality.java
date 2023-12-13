@@ -15,5 +15,6 @@ public interface DatabaseFunctionality {
     void addExercise(HashMap<String, String> hashMap, String trainingName);
     void modifyExercise(HashMap<String, String> hashMap, String trainingName, String oldName);
     void deleteExercise(String trainingName, String exerciseName);
+    ArrayList<ArrayList<String>> selectSessions();
     boolean addSession(String trainingName, String date, String time);
 }

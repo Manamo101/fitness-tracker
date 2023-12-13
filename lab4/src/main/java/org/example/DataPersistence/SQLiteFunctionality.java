@@ -41,6 +41,9 @@ public class SQLiteFunctionality implements DatabaseFunctionality{
     public void deleteExercise(String trainingName, String exerciseName){
         sqliteQuery.deleteExercise(trainingName, exerciseName);
     }
+    public ArrayList<ArrayList<String>> selectSessions(){
+        return sqliteQuery.selectSessions();
+    }
     public boolean addSession(String trainingName, String date, String time){
         return sqliteQuery.addSession(trainingName, date, time);
     }

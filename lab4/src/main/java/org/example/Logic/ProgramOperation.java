@@ -95,4 +95,7 @@ public class ProgramOperation {
     public static void deleteExercise(String trainingName, String exerciseName){
         database.deleteExercise(trainingName, new Scanner(exerciseName).next());
     }
+    public static ArrayList<ArrayList<String>> selectSessions(){
+        return database.selectSessions();
+    }
 }

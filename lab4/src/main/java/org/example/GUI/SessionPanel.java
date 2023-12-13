@@ -25,7 +25,6 @@ public class SessionPanel extends JPanel implements TableModelListener, ListSele
     private JLabel dataLabel;
     private JComboBox<String> comboBox;
     private JComboBox<String> sorting;
-    String[][] str;
     private JButton addButton;
     private JTextField HHMMSSTextField;
 
@@ -116,9 +115,9 @@ public class SessionPanel extends JPanel implements TableModelListener, ListSele
         this.setLayout(new BorderLayout());
         this.add(NorthPanel, BorderLayout.NORTH);
         comboBox.setModel(new DefaultComboBoxModel<>(ProgramOperation.trainingNames()));
-        str = new String[][]{{"ala", "ma", "kota"}, {"Franek", "ma", "psa"}};
         String[] column = {"training name", "date", "time"};
-        table = new JTable(str, column);
+        String[][] stringArray = ProgramOperation.selectSessions().stream().map(u -> u.toArray(new String[0])).toArray(String[][]::new);
+        table = new JTable(stringArray, column);
         table.setCellSelectionEnabled(true);
         table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getSelectionModel().addListSelectionListener(this);
