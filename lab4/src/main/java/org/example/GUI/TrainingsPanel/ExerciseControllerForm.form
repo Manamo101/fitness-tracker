@@ -80,7 +80,7 @@
               <horizontalTextPosition value="2"/>
               <rolloverEnabled value="false"/>
               <selected value="false"/>
-              <text value="loading"/>
+              <text value="loading (kg) "/>
             </properties>
           </component>
           <component id="462d9" class="javax.swing.JTextField" binding="loadingField">
@@ -92,7 +92,7 @@
           <grid id="829a0" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
             <constraints/>
             <properties>
-              <preferredSize width="300" height="10"/>
+              <preferredSize width="250" height="10"/>
             </properties>
             <border type="none"/>
             <children/>
@@ -101,7 +101,7 @@
             <constraints/>
             <properties>
               <minimumSize width="10" height="10"/>
-              <preferredSize width="60" height="10"/>
+              <preferredSize width="50" height="10"/>
             </properties>
             <border type="none"/>
             <children/>

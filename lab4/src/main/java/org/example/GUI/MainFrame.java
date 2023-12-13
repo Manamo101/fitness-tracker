@@ -10,7 +10,6 @@ import org.example.GUI.TrainingsPanel.TrainingPanel;
 import org.example.Logic.ProgramOperation;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.net.URL;
 
@@ -40,7 +39,7 @@ FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle(name);
-        this.setMinimumSize(new Dimension(800,600));
+        this.setMinimumSize(new Dimension(1050,600));
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         try{
@@ -50,15 +49,23 @@ FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
         catch (NullPointerException e){
             System.out.println("no icon found");
         }
-        databaseFileSelector();
+
+        //databaseFileSelector();
+        DatabaseFunctionality database = new SQLiteFunctionality("C:\\Users\\Kamil\\Desktop\\studia\\3 sem\\Jezyki programowania\\lab4\\lab4\\src\\main\\resources\\userdata.db");
+        ProgramOperation.setDatabase(database);
+
+
         this.add(tabbedPane);
         addExerciseTab();
         addSessionTab();
         addGoalsTab();
         addStatsTab();
+
+        tabbedPane.setSelectedIndex(1);
     }
     private void databaseFileSelector(){
         JFileChooser fileChooser = new JFileChooser(".");
+        fileChooser.setDialogTitle("Indicate your database");
         String path;
         DatabaseFunctionality database;
         boolean isFirst = true;

@@ -9,11 +9,8 @@ import java.util.Scanner;
 
 public class ProgramOperation {
     private static DatabaseFunctionality database;
-//    public static boolean doesDatabaseExist(String databaseName){
-//        return database.doesDatabaseExist(databaseName);
-//    }
 
-    public static HashMap<String, String> getListedRecord(String str){
+    public static HashMap<String, String> getListedExercises(String str){
         HashMap<String,String> hashMap = new HashMap<>();
         Scanner scanner = new Scanner(str);
         String exercise = "";

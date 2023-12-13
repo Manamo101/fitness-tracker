@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.example.GUI.SessionPanel">
+  <grid id="27dc6" binding="NorthPanel" default-binding="true" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+    <constraints>
+      <xy x="20" y="20" width="680" height="400"/>
+    </constraints>
+    <properties>
+      <focusTraversalPolicyProvider value="true"/>
+      <font size="14"/>
+      <preferredSize width="700" height="40"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="d2284" class="javax.swing.JLabel">
+        <constraints/>
+        <properties>
+          <font size="14"/>
+          <text value="choose session"/>
+        </properties>
+      </component>
+      <component id="b5a7d" class="javax.swing.JComboBox" binding="comboBox">
+        <constraints/>
+        <properties/>
+      </component>
+      <component id="ee3fe" class="javax.swing.JLabel" binding="dataLabel">
+        <constraints/>
+        <properties>
+          <font size="14"/>
+          <text value="set date"/>
+        </properties>
+      </component>
+      <component id="3e44b" class="javax.swing.JTextField" binding="dataField">
+        <constraints/>
+        <properties>
+          <preferredSize width="100" height="30"/>
+          <text value="YYYY-MM-DD"/>
+          <toolTipText value="YYYY-MM-DD"/>
+        </properties>
+      </component>
+      <component id="677c0" class="javax.swing.JLabel">
+        <constraints/>
+        <properties>
+          <font size="14"/>
+          <text value="time"/>
+          <toolTipText value=""/>
+        </properties>
+      </component>
+      <component id="f5d5" class="javax.swing.JTextField" binding="HHMMSSTextField" default-binding="true">
+        <constraints/>
+        <properties>
+          <preferredSize width="80" height="30"/>
+          <text value="HH:MM:SS"/>
+          <toolTipText value="HH:MM:SS"/>
+        </properties>
+      </component>
+      <component id="b67eb" class="javax.swing.JButton" binding="addButton" default-binding="true">
+        <constraints/>
+        <properties>
+          <text value="add"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
