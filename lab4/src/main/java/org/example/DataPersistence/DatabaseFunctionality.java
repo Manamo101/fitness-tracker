@@ -17,4 +17,6 @@ public interface DatabaseFunctionality {
     void deleteExercise(String trainingName, String exerciseName);
     ArrayList<ArrayList<String>> selectSessions();
     boolean addSession(String trainingName, String date, String time);
+    boolean modifySession(String newValue, String column, String date);
+    void deleteSession(String date);
 }

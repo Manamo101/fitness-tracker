@@ -22,19 +22,21 @@
         <constraints/>
         <properties/>
       </component>
-      <component id="ee3fe" class="javax.swing.JLabel" binding="dataLabel">
+      <component id="ee3fe" class="javax.swing.JLabel" binding="dateLabel">
         <constraints/>
         <properties>
           <font size="14"/>
           <text value="set date"/>
         </properties>
       </component>
-      <component id="3e44b" class="javax.swing.JTextField" binding="dataField">
+      <component id="3e44b" class="javax.swing.JTextField" binding="dateField">
         <constraints/>
         <properties>
           <preferredSize width="100" height="30"/>
+          <selectionStart value="8"/>
           <text value="YYYY-MM-DD"/>
           <toolTipText value="YYYY-MM-DD"/>
+          <verifyInputWhenFocusTarget value="true"/>
         </properties>
       </component>
       <component id="677c0" class="javax.swing.JLabel">
@@ -45,10 +47,11 @@
           <toolTipText value=""/>
         </properties>
       </component>
-      <component id="f5d5" class="javax.swing.JTextField" binding="HHMMSSTextField" default-binding="true">
+      <component id="f5d5" class="javax.swing.JTextField" binding="timeField">
         <constraints/>
         <properties>
           <preferredSize width="80" height="30"/>
+          <selectionStart value="8"/>
           <text value="HH:MM:SS"/>
           <toolTipText value="HH:MM:SS"/>
         </properties>
@@ -56,7 +59,26 @@
       <component id="b67eb" class="javax.swing.JButton" binding="addButton" default-binding="true">
         <constraints/>
         <properties>
+          <focusPainted value="false"/>
+          <focusable value="true"/>
           <text value="add"/>
+        </properties>
+      </component>
+      <component id="8a30f" class="javax.swing.JSeparator">
+        <constraints/>
+        <properties>
+          <background color="-16645885"/>
+          <focusable value="false"/>
+          <foreground color="-16645885"/>
+          <orientation value="1"/>
+          <preferredSize width="15" height="0"/>
+        </properties>
+      </component>
+      <component id="edb04" class="javax.swing.JButton" binding="deleteButton" default-binding="true">
+        <constraints/>
+        <properties>
+          <focusPainted value="false"/>
+          <text value="delete"/>
         </properties>
       </component>
     </children>

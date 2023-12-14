@@ -120,7 +120,7 @@ FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
             URL exerciseTabIconPath = MainFrame.class.getClassLoader().getResource("goalsTabIcon.png");
             ImageIcon icon = new ImageIcon(exerciseTabIconPath);
             Image iconScaled = icon.getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT);
-            tabbedPane.addTab("Goals", new ImageIcon(iconScaled),new SessionPanel());
+            tabbedPane.addTab("Goals", new ImageIcon(iconScaled),new JLabel("not yet"));
         }
         catch (NullPointerException e){
             System.out.println("image is not found");
@@ -132,7 +132,7 @@ FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
             URL exerciseTabIconPath = MainFrame.class.getClassLoader().getResource("statsTabIcon.png");
             ImageIcon icon = new ImageIcon(exerciseTabIconPath);
             Image iconScaled = icon.getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT);
-            tabbedPane.addTab("Statistics", new ImageIcon(iconScaled),new SessionPanel());
+            tabbedPane.addTab("Statistics", new ImageIcon(iconScaled),new JLabel("currently nothing :/"));
         }
         catch (NullPointerException e){
             System.out.println("image is not found");

@@ -50,7 +50,7 @@ public class SQLiteQuery {
             Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT COUNT(training_name) FROM trainings WHERE training_name ='" + name + "'");
-            boolean bool = result.getInt(1) != 0;
+            boolean bool = result.getInt(1) == 1;
             result.close();
             statement.close();
             connection.close();
@@ -73,7 +73,7 @@ public class SQLiteQuery {
             connection.close();
             return bool;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 
@@ -248,10 +248,47 @@ public class SQLiteQuery {
             ps.close();
             connection.close();
         } catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+
+    boolean modifySession(String newValue, String column, String date){
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
+            String query;
+            if (column.equals("training name")){
+                query ="UPDATE sessions SET training_name = ? WHERE session_date = ?";
+            }
+            else if (column.equals("date")){
+                query = "UPDATE sessions SET session_date = ? WHERE session_date = ?";
+            }
+            else {
+                query = "UPDATE sessions SET time = ? WHERE session_date = ?";
+            }
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, newValue);
+            ps.setString(2,date);
+            ps.executeUpdate();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
             e.getMessage();
             e.printStackTrace();
             return false;
         }
         return true;
+    }
+    void deleteSession(String date){
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM sessions WHERE session_date = ?");
+            ps.setString(1, date);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -1,7 +1,6 @@
 package org.example.Logic;
 
 import org.example.DataPersistence.DatabaseFunctionality;
-import org.example.DataPersistence.SQLiteFunctionality;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +40,9 @@ public class ProgramOperation {
     }
     public static String[] trainingNames(){
         return database.trainingNames();
+    }
+    public static boolean doesTrainingNameExist(String name){
+        return database.doesTrainingNameExist(name);
     }
     public static boolean addNewTraining(String name){
         if(name.isBlank() || database.doesTrainingNameExist(name)){
@@ -97,5 +99,14 @@ public class ProgramOperation {
     }
     public static ArrayList<ArrayList<String>> selectSessions(){
         return database.selectSessions();
+    }
+    public static boolean addSession(String trainingName, String date, String time){
+        return database.addSession(trainingName, date, time);
+    }
+    public static boolean modifySession(String newValue, String column, String date){
+        return database.modifySession(newValue, column, date);
+    }
+    public static void deleteSession(String date){
+        database.deleteSession(date);
     }
 }

@@ -47,4 +47,10 @@ public class SQLiteFunctionality implements DatabaseFunctionality{
     public boolean addSession(String trainingName, String date, String time){
         return sqliteQuery.addSession(trainingName, date, time);
     }
+    public boolean modifySession(String newValue, String column, String date){
+        return sqliteQuery.modifySession(newValue, column, date);
+    }
+    public void deleteSession(String date){
+        sqliteQuery.deleteSession(date);
+    }
 }
