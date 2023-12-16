@@ -9,8 +9,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.plaf.FontUIResource;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.text.StyleContext;
 import java.awt.*;
@@ -178,6 +176,7 @@ public class SessionPanel extends JPanel implements ActionListener, TableModelLi
     public void tableChanged(TableModelEvent e) {
         int row = e.getFirstRow();
         int column = e.getColumn();
+        System.out.println(table.getSelectedRow() + table.getSelectedColumn());
         TableModel model = (TableModel) e.getSource();
         String columnName = model.getColumnName(column);
         String newValue = model.getValueAt(row, column).toString();
@@ -209,8 +208,17 @@ public class SessionPanel extends JPanel implements ActionListener, TableModelLi
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == deleteButton) {
             ProgramOperation.deleteSession(date);
-            table.invalidate();
-        }
+//            scrollPane.remove(table);
+//            String[] columns = {"training name", "date", "time"};
+//            String[][] stringArray = ProgramOperation.selectSessions().stream().map(u -> u.toArray(new String[0])).toArray(String[][]::new);
+//            table = new JTable(stringArray, columns);
+//            table.setCellSelectionEnabled(true);
+//            table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//            table.getSelectionModel().addListSelectionListener(this);
+//            table.getModel().addTableModelListener(this);
+//            scrollPane.add(table);
+//            scrollPane.repaint();
 
+        }
     }
 }

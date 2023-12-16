@@ -53,4 +53,19 @@ public class SQLiteFunctionality implements DatabaseFunctionality{
     public void deleteSession(String date){
         sqliteQuery.deleteSession(date);
     }
+    public ArrayList<ArrayList<String>> selectGoals(){
+        return sqliteQuery.selectGoals();
+    }
+    public void deleteGoal(String exerciseName){
+        sqliteQuery.deleteGoal(exerciseName);
+    }
+    public String[] listAllExercises(){
+        return sqliteQuery.listAllExercises();
+    }
+    public boolean addGoal(String[] data){
+        return sqliteQuery.addGoal(data);
+    }
+    public void updateGoal(String[] data, String exercise){
+        sqliteQuery.updateGoal(data, exercise);
+    }
 }

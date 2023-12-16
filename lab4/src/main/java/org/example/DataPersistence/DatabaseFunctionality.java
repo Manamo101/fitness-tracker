@@ -19,4 +19,9 @@ public interface DatabaseFunctionality {
     boolean addSession(String trainingName, String date, String time);
     boolean modifySession(String newValue, String column, String date);
     void deleteSession(String date);
+    ArrayList<ArrayList<String>> selectGoals();
+    void deleteGoal(String exerciseName);
+    String[] listAllExercises();
+    boolean addGoal(String[] data);
+    void updateGoal(String[] data, String exercise);
 }

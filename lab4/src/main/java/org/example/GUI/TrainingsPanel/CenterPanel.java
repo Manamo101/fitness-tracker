@@ -22,13 +22,12 @@ class CenterPanel extends JPanel{
         this.add(scrollPane);
         this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
     }
-    CenterPanel(JComboBox comboBox){
+    CenterPanel(JComboBox<String> comboBox){
         List<String> list = ProgramOperation.listExercises((String)comboBox.getSelectedItem());
         DefaultListModel<String> listModel = new DefaultListModel<>();
         listModel.addAll(list);
         listing.removeAll();
         listing.setModel(listModel);
-
     }
     public void setTrainingPanelActionListener(TrainingPanelActionListener trainingPanelActionListener) {
         listing.addListSelectionListener(trainingPanelActionListener);

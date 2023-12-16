@@ -262,7 +262,7 @@ public class ExerciseController extends JFrame {
         }
         if (isGood) {
             if (model == NEW_EXERCISE) {
-                if (!ProgramOperation.addExercise(getValues(), trainingName)) {
+                if (!ProgramOperation.addExercise(getValues(), trainingName.toLowerCase())) {
                     JOptionPane.showMessageDialog(this, "exercise already exists", "exercise occupied", JOptionPane.ERROR_MESSAGE);
 
                     DefaultListModel<String> listModel = new DefaultListModel<>();

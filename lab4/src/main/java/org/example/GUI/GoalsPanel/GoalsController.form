@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.example.GUI.GoalsPanel.GoalsController">
+  <grid id="27dc6" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="503b" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints/>
+        <properties>
+          <doubleBuffered value="true"/>
+          <enabled value="true"/>
+          <inheritsPopupMenu value="false"/>
+          <maximumSize width="1000" height="1000"/>
+          <minimumSize width="400" height="300"/>
+          <preferredSize width="400" height="300"/>
+          <requestFocusEnabled value="false"/>
+          <visible value="true"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="2451c" layout-manager="FlowLayout" hgap="10" vgap="5" flow-align="0">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <focusable value="false"/>
+              <minimumSize width="10" height="42"/>
+            </properties>
+            <border type="none" title=""/>
+            <children>
+              <component id="56a3f" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <font size="12"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <text value="select exercise"/>
+                </properties>
+              </component>
+              <component id="ddddf" class="javax.swing.JComboBox" binding="comboBox">
+                <constraints/>
+                <properties/>
+              </component>
+              <grid id="f4635" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <preferredSize width="40" height="10"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <component id="c769c" class="javax.swing.JRadioButton" binding="repetitionsRadioButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <focusable value="false"/>
+                  <text value="repetitions"/>
+                </properties>
+              </component>
+              <component id="9fd11" class="javax.swing.JRadioButton" binding="timeRadioButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <focusable value="false"/>
+                  <preferredSize width="70" height="21"/>
+                  <text value="time (s)"/>
+                </properties>
+              </component>
+              <component id="f850b" class="javax.swing.JTextField" binding="timeRepValueField">
+                <constraints/>
+                <properties>
+                  <preferredSize width="50" height="25"/>
+                </properties>
+              </component>
+              <component id="f6191" class="javax.swing.JCheckBox" binding="loadingCheckBox" default-binding="true">
+                <constraints/>
+                <properties>
+                  <borderPaintedFlat value="false"/>
+                  <contentAreaFilled value="true"/>
+                  <focusable value="false"/>
+                  <horizontalTextPosition value="2"/>
+                  <rolloverEnabled value="false"/>
+                  <selected value="false"/>
+                  <text value="loading (kg) "/>
+                </properties>
+              </component>
+              <component id="83da" class="javax.swing.JTextField" binding="loadingField">
+                <constraints/>
+                <properties>
+                  <preferredSize width="50" height="25"/>
+                </properties>
+              </component>
+              <component id="365db" class="javax.swing.JSeparator">
+                <constraints/>
+                <properties>
+                  <preferredSize width="60" height="0"/>
+                </properties>
+              </component>
+              <component id="a84e7" class="javax.swing.JLabel">
+                <constraints/>
+                <properties>
+                  <text value="deadline"/>
+                </properties>
+              </component>
+              <component id="b869a" class="javax.swing.JTextField" binding="deadlineField">
+                <constraints/>
+                <properties/>
+              </component>
+              <grid id="62254" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <preferredSize width="250" height="10"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="87ff5" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <minimumSize width="10" height="10"/>
+                  <preferredSize width="50" height="10"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <component id="e303c" class="javax.swing.JButton" binding="addButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <enabled value="true"/>
+                  <focusable value="false"/>
+                  <text value="add"/>
+                  <visible value="true"/>
+                </properties>
+              </component>
+              <component id="b028d" class="javax.swing.JButton" binding="modifyButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <focusable value="false"/>
+                  <text value="modify"/>
+                </properties>
+              </component>
+              <component id="cc99f" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
+                <constraints/>
+                <properties>
+                  <focusable value="false"/>
+                  <text value="cancel"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="e8647" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints border-constraint="West"/>
+            <properties>
+              <preferredSize width="60" height="20"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="fcad7" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints border-constraint="South"/>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="baa07" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints border-constraint="North"/>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="ebee9" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints border-constraint="East"/>
+            <properties>
+              <preferredSize width="60" height="10"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+  <buttonGroups>
+    <group name="buttonGroup1">
+      <member id="9fd11"/>
+      <member id="c769c"/>
+    </group>
+  </buttonGroups>
+</form>

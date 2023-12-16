@@ -1,11 +1,8 @@
 package org.example.GUI;
 
-import com.formdev.flatlaf.FlatDefaultsAddon;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import org.example.DataPersistence.DatabaseFunctionality;
 import org.example.DataPersistence.SQLiteFunctionality;
-import org.example.DataPersistence.SQLiteQuery;
+import org.example.GUI.GoalsPanel.GoalsPanel;
 import org.example.GUI.TrainingsPanel.TrainingPanel;
 import org.example.Logic.ProgramOperation;
 
@@ -61,7 +58,7 @@ FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
         addGoalsTab();
         addStatsTab();
 
-        tabbedPane.setSelectedIndex(1);
+        tabbedPane.setSelectedIndex(2);
     }
     private void databaseFileSelector(){
         JFileChooser fileChooser = new JFileChooser(".");
@@ -120,11 +117,11 @@ FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
             URL exerciseTabIconPath = MainFrame.class.getClassLoader().getResource("goalsTabIcon.png");
             ImageIcon icon = new ImageIcon(exerciseTabIconPath);
             Image iconScaled = icon.getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT);
-            tabbedPane.addTab("Goals", new ImageIcon(iconScaled),new JLabel("not yet"));
+            tabbedPane.addTab("Goals", new ImageIcon(iconScaled),new GoalsPanel());
         }
         catch (NullPointerException e){
             System.out.println("image is not found");
-            tabbedPane.addTab("Goals", new SessionPanel());
+            tabbedPane.addTab("Goals", new GoalsPanel());
         }
     }
     private void addStatsTab() {

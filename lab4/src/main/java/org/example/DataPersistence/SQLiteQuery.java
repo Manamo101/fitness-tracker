@@ -39,7 +39,7 @@ public class SQLiteQuery {
             result.close();
             statement.close();
             connection.close();
-            return list.toArray(new String[list.size()]);
+            return list.toArray(new String[0]);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -48,11 +48,12 @@ public class SQLiteQuery {
     boolean doesTrainingNameExist(String name) {
         try {
             Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT COUNT(training_name) FROM trainings WHERE training_name ='" + name + "'");
+            PreparedStatement ps = connection.prepareStatement("SELECT COUNT(training_name) FROM trainings WHERE training_name = ?");
+            ps.setString(1, name);
+            ResultSet result = ps.executeQuery();
             boolean bool = result.getInt(1) == 1;
             result.close();
-            statement.close();
+            ps.close();
             connection.close();
             return bool;
         } catch (SQLException e) {
@@ -115,13 +116,14 @@ public class SQLiteQuery {
     boolean updateTrainingName(String oldName, String newName) {
         try {
             Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
-            String query = "UPDATE trainings SET training_name = '" + newName + "' WHERE training_name = '" + oldName + "'";
-            Statement statement = connection.createStatement();
-            statement.execute(query);
-            statement.close();
+
+            PreparedStatement ps1 = connection.prepareStatement("UPDATE trainings SET training_name = ? WHERE training_name = ?");
+            ps1.setString(1,newName);
+            ps1.setString(2,oldName);
+            ps1.executeUpdate();
+            ps1.close();
 
             PreparedStatement ps2 = connection.prepareStatement("UPDATE exercises SET training_name = ? WHERE training_name = ?");
-
             ps2.setString(1, newName);
             ps2.setString(2, oldName);
             ps2.executeUpdate();
@@ -273,8 +275,6 @@ public class SQLiteQuery {
             ps.close();
             connection.close();
         } catch (SQLException e) {
-            e.getMessage();
-            e.printStackTrace();
             return false;
         }
         return true;
@@ -285,6 +285,108 @@ public class SQLiteQuery {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM sessions WHERE session_date = ?");
             ps.setString(1, date);
             ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    ArrayList<ArrayList<String>> selectGoals() {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM goals");
+            ResultSet result = ps.executeQuery();
+            ArrayList<ArrayList<String>> list = new ArrayList<>();
+            while (result.next()) {
+                list.add(new ArrayList<>());
+                list.get(list.size() - 1).add(result.getString(1));
+                list.get(list.size() - 1).add(result.getString(2));
+                list.get(list.size() - 1).add(result.getString(3));
+                list.get(list.size() - 1).add(result.getString(4));
+                list.get(list.size() - 1).add(result.getString(5));
+            }
+            result.close();
+            ps.close();
+            connection.close();
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    void deleteGoal(String exerciseName){
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM goals WHERE exercise_name = ?");
+            ps.setString(1, exerciseName);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    String[] listAllExercises(){
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT DISTINCT name FROM exercises");
+            List<String> list = new ArrayList<>();
+            while (result.next()) {
+                list.add(result.getString("name"));
+            }
+            result.close();
+            statement.close();
+            connection.close();
+            return list.toArray(new String[0]);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    boolean addGoal(String[] data){
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO goals VALUES (?,?,?,?,?)");
+            ps.setString(1, data[0]);
+            if (data[1] != null){
+                ps.setInt(2,Integer.parseInt(data[1]));
+            }
+            if (data[2] != null){
+                ps.setInt(3,Integer.parseInt(data[2]));
+            }
+            if (data[3] != null){
+                ps.setInt(4,Integer.parseInt(data[3]));
+            }
+            ps.setString(5, data[4]);
+            ps.execute();
+            ps.close();
+            connection.close();
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+    void updateGoal(String[] data, String exerciseName){
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
+            PreparedStatement ps = connection.prepareStatement("UPDATE goals SET " +
+                    "repetitions = ?," +
+                    "time = ?," +
+                    "loading = ?," +
+                    "deadline = ?" +
+                    "WHERE exercise_name = ?");
+            if (data[1] != null){
+                ps.setInt(1,Integer.parseInt(data[1]));
+            }
+            if (data[2] != null){
+                ps.setInt(2,Integer.parseInt(data[2]));
+            }
+            if (data[3] != null){
+                ps.setInt(3,Integer.parseInt(data[3]));
+            }
+            ps.setString(4, data[4]);
+            ps.setString(5, exerciseName);
+            ps.executeUpdate();
             ps.close();
             connection.close();
         } catch (SQLException e) {
