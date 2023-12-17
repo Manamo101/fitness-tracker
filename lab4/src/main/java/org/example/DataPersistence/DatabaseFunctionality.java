@@ -24,4 +24,5 @@ public interface DatabaseFunctionality {
     String[] listAllExercises();
     boolean addGoal(String[] data);
     void updateGoal(String[] data, String exercise);
+    ArrayList<ArrayList<String>> selectExerciseStats(String exerciseName);
 }

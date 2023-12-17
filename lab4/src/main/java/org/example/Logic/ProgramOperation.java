@@ -175,4 +175,7 @@ public class ProgramOperation {
     public static void modifyGoal(String[] data, String exercise){
         database.updateGoal(data, exercise);
     }
+    public static ArrayList<ArrayList<String>> selectExerciseStats(String exerciseName){
+        return database.selectExerciseStats(exerciseName);
+    }
 }

@@ -107,6 +107,11 @@ public class SQLiteQuery {
             ps2.setString(1, name);
             ps2.execute();
             ps2.close();
+
+            PreparedStatement ps3 = connection.prepareStatement("DELETE FROM sessions WHERE training_name = ?");
+            ps3.setString(1, name);
+            ps3.execute();
+            ps3.close();
             connection.close();
         } catch (SQLException e) {
             System.out.println("removing training went wrong");
@@ -128,6 +133,12 @@ public class SQLiteQuery {
             ps2.setString(2, oldName);
             ps2.executeUpdate();
             ps2.close();
+
+            PreparedStatement ps3 = connection.prepareStatement("UPDATE sessions SET training_name = ? WHERE training_name = ?");
+            ps3.setString(1, newName);
+            ps3.setString(2, oldName);
+            ps3.executeUpdate();
+            ps3.close();
             connection.close();
         } catch (SQLException e) {
             System.out.println("updateTrainingName() went wrong");
@@ -273,6 +284,7 @@ public class SQLiteQuery {
             ps.setString(2,date);
             ps.executeUpdate();
             ps.close();
+
             connection.close();
         } catch (SQLException e) {
             return false;
@@ -393,4 +405,36 @@ public class SQLiteQuery {
             throw new RuntimeException(e);
         }
     }
+//    select * from exercises INNER JOIN main.sessions s on exercises.training_name = s.training_name where session_date between date('now','start of month') and date('now','start of month','+1 month','-1 day') and exercises.name = 'dips'
+ArrayList<ArrayList<String>> selectExerciseStats(String exerciseName) {
+    try {
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:" + databaseName);
+        String query = "select * from exercises " +
+                "INNER JOIN main.sessions s on exercises.training_name = s.training_name " +
+                "where session_date between date('now','start of month') and " +
+                "date('now','start of month','+1 month','-1 day') " +
+                "and exercises.name = ? order by session_date";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setString(1, exerciseName);
+        ResultSet result = ps.executeQuery();
+        ArrayList<ArrayList<String>> list = new ArrayList<>();
+        while (result.next()) {
+            list.add(new ArrayList<>());
+            list.get(list.size() - 1).add(result.getString(1));
+            list.get(list.size() - 1).add(result.getString(2));
+            list.get(list.size() - 1).add(result.getString(3));
+            list.get(list.size() - 1).add(result.getString(4));
+            list.get(list.size() - 1).add(result.getString(5));
+            list.get(list.size() - 1).add(result.getString(6));
+            list.get(list.size() - 1).add(result.getString(7));
+            list.get(list.size() - 1).add(result.getString(8));
+        }
+        result.close();
+        ps.close();
+        connection.close();
+        return list;
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+}
 }

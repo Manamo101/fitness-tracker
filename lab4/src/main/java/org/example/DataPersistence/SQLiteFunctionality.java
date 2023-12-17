@@ -68,4 +68,7 @@ public class SQLiteFunctionality implements DatabaseFunctionality{
     public void updateGoal(String[] data, String exercise){
         sqliteQuery.updateGoal(data, exercise);
     }
+    public ArrayList<ArrayList<String>> selectExerciseStats(String exerciseName){
+        return sqliteQuery.selectExerciseStats(exerciseName);
+    }
 }
