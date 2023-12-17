@@ -8,6 +8,7 @@ import org.example.Logic.ProgramOperation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.ImagingOpException;
 import java.net.URL;
 
 public class MainFrame extends JFrame {
@@ -58,7 +59,7 @@ FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
         addGoalsTab();
         addStatsTab();
 
-        tabbedPane.setSelectedIndex(2);
+        tabbedPane.setSelectedIndex(3); /////////////////////////////////////////
     }
     private void databaseFileSelector(){
         JFileChooser fileChooser = new JFileChooser(".");
@@ -129,11 +130,11 @@ FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
             URL exerciseTabIconPath = MainFrame.class.getClassLoader().getResource("statsTabIcon.png");
             ImageIcon icon = new ImageIcon(exerciseTabIconPath);
             Image iconScaled = icon.getImage().getScaledInstance(30,30,Image.SCALE_DEFAULT);
-            tabbedPane.addTab("Statistics", new ImageIcon(iconScaled),new JLabel("currently nothing :/"));
+            tabbedPane.addTab("Statistics", new ImageIcon(iconScaled),new StatsPanel());
         }
         catch (NullPointerException e){
             System.out.println("image is not found");
-            tabbedPane.addTab("Statistics", new SessionPanel());
+            tabbedPane.addTab("Statistics", new StatsPanel());
         }
     }
 }
