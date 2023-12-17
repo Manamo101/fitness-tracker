@@ -48,9 +48,9 @@ FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
             System.out.println("no icon found");
         }
 
-        //databaseFileSelector();
-        DatabaseFunctionality database = new SQLiteFunctionality("C:\\Users\\Kamil\\Desktop\\studia\\3 sem\\Jezyki programowania\\lab4\\lab4\\src\\main\\resources\\userdata.db");
-        ProgramOperation.setDatabase(database);
+        databaseFileSelector();
+//        DatabaseFunctionality database = new SQLiteFunctionality("C:\\Users\\Kamil\\Desktop\\studia\\3 sem\\Jezyki programowania\\lab4\\lab4\\src\\main\\resources\\userdata.db");
+//        ProgramOperation.setDatabase(database);
 
 
         this.add(tabbedPane);
@@ -59,7 +59,6 @@ FlatLaf macOS Dark v3 (class com.formdev.flatlaf.themes.FlatMacDarkLaf)
         addGoalsTab();
         addStatsTab();
 
-        tabbedPane.setSelectedIndex(3); /////////////////////////////////////////
     }
     private void databaseFileSelector(){
         JFileChooser fileChooser = new JFileChooser(".");
